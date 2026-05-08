@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 20th My Darling ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    background:
+        radial-gradient(circle at top, rgba(255,60,60,0.35), transparent 35%),
+        linear-gradient(
+            135deg,
+            #2b0000,
+            #520000,
+            #7a0000,
+            #330000
+        );
+
+    background-size:400% 400%;
+    animation:gradientBG 12s ease infinite;
+
+    color:white;
+    overflow-x:hidden;
+    position:relative;
+}
+
+body.locked{
+    overflow:hidden;
+}
+
+/* SOFT OVERLAY */
+
+body::before{
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    background:
+        radial-gradient(circle at center,
+        rgba(255,255,255,0.03),
+        transparent 60%);
+
+    pointer-events:none;
+    z-index:-1;
+}
+
+/* ANIMATION */
+
+@keyframes gradientBG{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+/* FLOATING HEARTS */
+
+.hearts::before,
+.hearts::after{
+
+    content:"❤️ ❤️ ❤️ ❤️ ❤️";
+
+    position:fixed;
+
+    width:100%;
+
+    top:-50px;
+    left:0;
+
+    font-size:2rem;
+
+    opacity:0.12;
+
+    animation:floatHearts 15s linear infinite;
+
+    pointer-events:none;
+}
+
+.hearts::after{
+    animation-delay:7s;
+}
+
+@keyframes floatHearts{
+
+    from{
+        transform:translateY(-100px);
+    }
+
+    to{
+        transform:translateY(110vh);
+    }
+}
+
+/* OVERLAY */
+
+.overlay{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,0.55);
+
+    backdrop-filter:blur(6px);
+
+    z-index:1500;
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:0.4s;
+}
+
+.overlay.show{
+
+    opacity:1;
+    pointer-events:all;
+}
+
+/* POPUP */
+
+.popup{
+
+    position:fixed;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%) scale(0);
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(16px);
+
+    padding:35px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    border:1px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+        0 0 30px rgba(255,0,0,0.35);
+
+    z-index:2000;
+
+    transition:0.4s;
+
+    width:340px;
+}
+
+.popup.show{
+    transform:translate(-50%,-50%) scale(1);
+}
+
+.popup h2{
+
+    color:#ff4d4d;
+    margin-bottom:12px;
+    font-size:2rem;
+}
+
+.popup p{
+    line-height:1.6;
+}
+
+.popup button{
+
+    margin-top:22px;
+
+    padding:12px 24px;
+
+    border:none;
+
+    background:#ff2d2d;
+
+    color:white;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:0.3s;
+
+    box-shadow:
+        0 0 15px rgba(255,0,0,0.45);
+}
+
+.popup button:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:
+        0 0 25px rgba(255,0,0,0.8);
+}
+
+/* MUSIC BUTTON */
+
+.music-btn{
+
+    position:fixed;
+
+    bottom:20px;
+    right:20px;
+
+    background:#ff2d2d;
+
+    border:none;
+
+    padding:14px 16px;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    z-index:1000;
+
+    color:white;
+
+    font-size:1rem;
+
+    transition:0.3s;
+
+    box-shadow:
+        0 0 15px rgba(255,0,0,0.4);
+}
+
+.music-btn:hover{
+
+    transform:scale(1.1);
+
+    box-shadow:
+        0 0 25px rgba(255,0,0,0.8);
+}
+
+/* NAV */
+
+nav{
+
+    position:fixed;
+
+    top:0;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:40px;
+
+    padding:18px;
+
+    background:rgba(255,255,255,0.06);
+
+    backdrop-filter:blur(12px);
+
+    z-index:1000;
+}
+
+nav a{
+
+    color:white;
+
+    text-decoration:none;
+
+    transition:0.3s;
+
+    font-weight:500;
+}
+
+nav a:hover{
+    color:#ff8080;
+}
+
+/* SECTION */
+
+section{
+
+    padding:100px 10%;
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:1s ease;
+}
+
+section.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+/* HERO */
+
+.messages{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    text-align:center;
+}
+
+.messages h1{
+
+    font-size:4rem;
+
+    color:#ff4d4d;
+
+    text-shadow:
+        0 0 12px rgba(255,80,80,0.8),
+        0 0 25px rgba(255,80,80,0.5);
+
+    margin-bottom:20px;
+}
+
+.messages p{
+
+    max-width:800px;
+
+    line-height:1.9;
+
+    font-size:1.2rem;
+}
+
+/* TITLES */
+
+.gallery h2,
+.birthday-messages h2{
+
+    text-align:center;
+
+    color:#ff6666;
+
+    margin-bottom:40px;
+
+    font-size:2.3rem;
+}
+
+/* GALLERY */
+
+.gallery-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:20px;
+}
+
+.gallery-grid img{
+
+    width:100%;
+
+    height:260px;
+
+    object-fit:cover;
+
+    border-radius:18px;
+
+    transition:0.4s;
+
+    border:1px solid rgba(255,255,255,0.12);
+
+    box-shadow:
+        0 0 20px rgba(255,100,100,0.18);
+}
+
+.gallery-grid img:hover{
+
+    transform:scale(1.03);
+
+    box-shadow:
+        0 0 30px rgba(255,100,100,0.4);
+}
+
+/* FLIP CARDS */
+
+.message-cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:25px;
+}
+
+.flip-card{
+    perspective:1000px;
+}
+
+.flip-inner{
+
+    position:relative;
+
+    width:100%;
+    height:420px;
+
+    transition:transform 0.6s;
+
+    transform-style:preserve-3d;
+}
+
+.flip-card:hover .flip-inner{
+    transform:rotateY(180deg);
+}
+
+.flip-front,
+.flip-back{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    border-radius:18px;
+
+    backface-visibility:hidden;
+
+    display:flex;
+
+    justify-content:flex-start;
+
+    align-items:flex-start;
+
+    text-align:left;
+
+    padding:25px;
+
+    overflow-y: auto;
+
+    line-height: 1.7;
+
+    font-size: 0.95rem;
+}
+
+.flip-front{
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(16px);
+
+    border:1px solid rgba(255,255,255,0.12);
+
+    color:#ff6666;
+
+    font-weight:600;
+
+    transition:0.3s;
+
+    box-shadow:
+        0 0 20px rgba(255,100,100,0.15);
+}
+
+.flip-card:hover .flip-front{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 0 30px rgba(255,100,100,0.35);
+}
+
+.flip-back{
+
+    background:rgba(120,0,0,0.65);
+
+    backdrop-filter:blur(16px);
+
+    transform:rotateY(180deg);
+
+    border:1px solid rgba(255,255,255,0.12);
+}
+
+/* FOOTER */
+
+footer{
+
+    text-align:center;
+
+    padding:35px;
+
+    opacity:0.85;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+
+    <h2>🎉 Happy 20th My Darling ❤️</h2>
+
+    <p>
+        I hope you like this ❤️
+    </p>
+
+    <button onclick="closePopup()">
+        Open
+    </button>
+
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+    <source src="allofme.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" onclick="toggleMusic()">
+    🎵
+</button>
+
+<!-- NAV -->
+<nav>
+
+    <a href="#home">Messages</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#birthday-messages">Messages</a>
+
+</nav>
+
+<!-- HERO -->
+<section class="messages show" id="home">
+
+    <h1>Happy 20th My Darling ❤️</h1>
+
+    <p id="typing"></p>
+
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+
+    <h2>Our Moments ❤️</h2>
+
+    <div class="gallery-grid">
+
+        <img src="photo1.jpg">
+        <img src="photo2.jpg">
+        <img src="photo3.jpg">
+        <img src="photo4.jpg">
+        <img src="photo5.jpg">
+        <img src="photo6.jpg">
+        <img src="photo7.jpg">
+        <img src="photo8.jpg">
+        <img src="photo9.jpg">
+        <img src="photo10.jpg">
+        <img src="photo11.jpg">
+        <img src="photo12.jpg">
+        <img src="photo13.jpg">
+        <img src="photo14.jpg">
+        <img src="photo15.jpg">
+        <img src="photo16.jpg">
+        <img src="photo17.jpg">
+        <img src="photo18.jpg">
+
+    </div>
+
+</section>
+
+<!-- FLIP MESSAGES -->
+<section class="birthday-messages" id="birthday-messages">
+
+    <h2>Messages For You ❤️</h2>
+
+    <div class="message-cards">
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Aaron </div>
+                <div class="flip-back">Big up pan ur Strong #1Broski🎉🥂. Its been 6+ years since we sat together in class and just instantly clicked. We have years of good memories and laughter to look back on and I can say you've been a real brother all throughout. More life more blessings my bro, U deserve everything this life has to offer as a real G, and I hope to witness you amass it all🤍💯 </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Jamie </div>
+                <div class="flip-back">YOOO Traedon!! Happy birthday mann! I wish you all the best and I hope your birthday goes well. Please take your time to relax and enjoy your day too! Kick your feet up, watch some tik tok and anime and just do you man. All love and blessings! </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Matthew </div>
+                <div class="flip-back">Happy birthday papi
+Yah real bro, hella zesty to the point weh me affi wonder if yah be for real but a jhuss our lil ting dat 😏
+
+More life and more wealth my bro🙏</div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Nathan</div>
+                <div class="flip-back">More life eno bro, take time on the road 😂. Life is short so slow down and enjoy it, you don’t have to be going fast all the time. Always be true to yourself and stay in your lane.  Continue to do your thing, goodluck with everything especially Ms Harris, you’ll need it 😂 </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Ally </div>
+                <div class="flip-back">Hi secretary! Happy happy birthday old man. I pray that this chapter grants you so many opportunities for success. Thank you sm for always showing interest in how I’m doing when the halls of sci tech are beating me bad. Although I’ll jump you if Andi tells me to, you get a gold star in my book. 
+Have an amazing day!</div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Gabby G</div>
+                <div class="flip-back">Happiest Birthday to you my friend, Traédon. It has been an absolute pleasure knowing you and seeing the young man you’re becoming. The different eras of our friendships such as Traédonisha and Bear Hug. You have always been a joy to be around and your jovial personality has uplifted and definitely helped the mood more times than you know. Truly grateful to have you as one of my long standing friends. I pray that God brings you success, happiness, peace, and contentment. May He be your strength and guide in everything you do and that’ll you continue to seek His face🥳🤍
+
+Numbers 6: 24-26🤍</div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Adeen</div>
+                <div class="flip-back">Happy birthday, Treadon, I hope you have many, many more great birthdays. You are a great friend and probably one of the funniest people I know. I am lucky to have you in my life, and I wish you great fortune and lots of money.🫶🏾🥳</div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Daijanae</div>
+                <div class="flip-back">Happy Birthday Traedon!!🎉☺️ I hope you enjoy your day to the fullest and that God continues to bless you! Thank you for being an honest, cheerful and kind friend over these past few years! You definitely kept French and Entrep classes interesting😂 and you genuinely helped me get through Digi. I found it so cool to look back on those videos we made for class. Continue being and becoming who you're meant to be. May this chapter come with many fun experiences and blessings!</div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Akilah</div>
+                <div class="flip-back">Happy Birthday Traédon! I’m so happy to have met you and still can’t believe we went an entire semester being in the same lab and lectures and not speaking…insanity. Butttt all that matters now is that we’re friends. We friended so hard we became siblings! I hope this year brings you lots of joy and happy memories, and I hope that year 20 is the best one yet🎉
+-Sister</div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Rachael</div>
+                <div class="flip-back">HAPPPYYY BIRTHDAYYY TRAEDONNN🥳🎉
+I genuinely don’t think I’ve ever met anybody quite like you before. You’re honestly such a sweet soul and just a literal ray of sunshine to everybody around you. The way you’re so authentic and unapologetically yourself is one of my favourite things about you, and it makes being around you so easy and comforting. I’m really really happy we started talking because you’ve become such a special person to me frr.
+You’re one of the nicest people I know like the respectful kind of nice too😭 opening doors, being thoughtful, checking in on people, making everybody included... And don’t even get me started on how you somehow know EVERYTHING about every topic possible💀 like way you always have a fun fact or explanation ready??
+Also I love how you give everybody nicknames😭 Ray Ray is still the nicest thing. It’s a little thing but it’s also so you, and it makes people feel special. And of course we can’t forget our shared passion for driving...not slow (even though one of us can’t actually drive yet lmao).
+Never a dull moment with you honestly. I just hope today reminds you how loved and appreciated you are because you deserve every bit of happiness coming your way. Keep being the sweet, funny, genuine person you are because people like you are genuinely rare. We love you loads bro and I hope you have the BEST birthday everrr🤍🥳</div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Otylia</div>
+                <div class="flip-back">Happy Birthday Traédon, I hope that you have a great day and continue to bloom where you are planted like the blue boy you are. May God continue to bless and keep you. Happy Birthday from the Don</div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Katelan</div>
+                <div class="flip-back">Happy birthday Traédon!! You’re twenty 🎉🎂!! I hope you have a great birthday and great rest of the year.</div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Abigail Collins</div>
+                <div class="flip-back">happy happy birthdayyy from the chilli’s crew! we wish it was our birthday so we could party too!! happy birthday traédon! i had no clue your name had an accent on it, that’s really cool. i hope you have an amazing birthday filled with love and laughter and joy and rainbows and many sunshines and that you are content w the age you are now progressing into 😃! i wish you many many many more wonderful birthdays and many more beautiful earthstrongs! there’s no day like your day! #traédonisawesome #wealllovetraédon #traédonisthebest</div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Andrianna</div>
+                <div class="flip-back">Happy birthday Traedonn✨
+Here's to another year around the sun, I pray that this year is one of your best yet! May the Lord continue to keep and guide you in this new year, I pray the desires of your heart are met as He reveals Himself to you, Have a day as awesome as you are✨🤍</div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Christel</div>
+                <div class="flip-back">Hey Trae!
+I hope you have an amazing birthday and thank you for always being such a kind soul and never failing to say "hey guys!" whenever you see me I pray God continues to bless you and keep you
+Happy birthday 🥳✨</div>
+            </div>
+
+         </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Justene</div>
+                <div class="flip-back">Hey Traedonnn!!! Happy happy happy birthdayyyy!!! I really do hope you enjoy and live to see many many manyyyy moreee!! Continue being the kind, caring and overall authentic person you are! Never and I mean neverrr let the darkness of the world dim the light that you bring to the people around you, you have no idea how much it meant to have you apart of my high school journey. Again Happy birthdayyyyy!!!</div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Jeron</div>
+                <div class="flip-back">more life enuh bad bro 
+1traebae pan e app🖤</div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Abigail Cato</div>
+                <div class="flip-back">Hi Traedon!
+Happy birthday doll! I hope you have a really good day and pls doh speed pan the toll a beg
+~Sheep</div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Kalea</div>
+                <div class="flip-back">Happy Birthday Traedon!!! I'm so grateful that I met you this year. You have the brightest, most positive spirit that lights up any room and raises any mood. You truly are a blessing to everyone you interact with and you always do some small deed that makes someone's day. As a Christ driven young person it's such a pleasure to call you my friend and I wish you many more wonderful years to come.</div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Emilie</div>
+                <div class="flip-back">Happy birthday Traedon🥳. Welcome to a new chapter of your life and may it be successful and blessed one. I pray that you continue to grow in God's strength and grace for your life. Enjoy the rest of your 24 hrs and I wish you all the best life has to offer✨🫶🏾</div>
+            </div>
+        </div>
+
+<div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">Faith</div>
+                <div class="flip-back">Happy Birthday Traedon!!!
+
+You're such a kind, caring, gentle, compassionate person. I really do love being around you. You inspire me so much as well. Your undiluted and constant joy reminds me that I don't have to be afraid to be happy and to express myself. The way you fill a room with your personality reminds me that I don't have to be afraid to truly be myself. 
+
+You are a gift to the world and I'm grateful for your friendship. I hope that you enjoy your birthday and that you treat yourself because you really do deserve it. I hope that you grow closer to God and that He'll continue to bless and guide you. Happy Birthday again💓</div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+    Made with ❤️
+
+</footer>
+
+<script>
+
+const popup = document.getElementById("popup");
+const overlay = document.getElementById("overlay");
+const music = document.getElementById("music");
+
+/* POPUP FIRST */
+
+window.onload = () => {
+
+    document.body.classList.add("locked");
+
+    overlay.classList.add("show");
+
+    popup.classList.add("show");
+
+    confetti({
+
+        particleCount:150,
+        spread:100,
+
+        origin:{ y:0.6 }
+
+    });
+
+    typeWriter();
+};
+
+/* CLOSE POPUP */
+
+function closePopup(){
+
+    popup.classList.remove("show");
+
+    overlay.classList.remove("show");
+
+    document.body.classList.remove("locked");
+
+    music.play();
+}
+
+/* MUSIC */
+
+function toggleMusic(){
+
+    if(music.paused){
+
+        music.play();
+
+    } else {
+
+        music.pause();
+    }
+}
+
+/* TYPEWRITER */
+
+const text =
+"Happy Birthday My Love🎉🎉 Wow, you're kinda old now buddy. I pray you have the most amazing day ever. I pray you will receive even a portion of the love and happiness that you spread. I am so grateful for you and all that you continue to do for me. Thank you for always being in my corner and for choosing me daily. I love you forever😘❤️ ";
+
+let i = 0;
+
+function typeWriter(){
+
+    if(i < text.length){
+
+        document.getElementById("typing").innerHTML += text.charAt(i);
+
+        i++;
+
+        setTimeout(typeWriter, 60);
+    }
+}
+
+/* SCROLL REVEAL */
+
+const sections = document.querySelectorAll("section");
+
+window.addEventListener("scroll", () => {
+
+    sections.forEach(sec => {
+
+        const top = sec.getBoundingClientRect().top;
+
+        if(top < window.innerHeight - 100){
+
+            sec.classList.add("show");
+        }
+    });
+});
+
+/* CURSOR SPARKLES */
+
+document.addEventListener("mousemove", e => {
+
+    const sparkle = document.createElement("div");
+
+    sparkle.style.position = "fixed";
+
+    sparkle.style.left = e.clientX + "px";
+    sparkle.style.top = e.clientY + "px";
+
+    sparkle.style.width = "6px";
+    sparkle.style.height = "6px";
+
+    sparkle.style.background = "#ff8080";
+
+    sparkle.style.borderRadius = "50%";
+
+    sparkle.style.pointerEvents = "none";
+
+    sparkle.style.zIndex = "9999";
+
+    sparkle.style.opacity = "0.8";
+
+    sparkle.style.transition = "all 0.5s linear";
+
+    document.body.appendChild(sparkle);
+
+    setTimeout(() => {
+
+        sparkle.style.opacity = "0";
+        sparkle.style.transform = "scale(0)";
+
+    }, 10);
+
+    setTimeout(() => {
+
+        sparkle.remove();
+
+    }, 500);
+
+});
+
+</script>
+
+</body>
+</html>
+
